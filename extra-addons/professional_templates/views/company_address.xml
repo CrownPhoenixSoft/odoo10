@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+      <!--<template id="report_assets_editor" inherit_id="report.assets_editor">
+          <xpath expr="." position="inside">
+              <script type="text/javascript" src="/professional_templates/static/src/js/wkhtmltopdf_totals.js"></script>
+          </xpath>
+      </template> -->
+
+      <!--This is to correct the missing font-icons in the PDF reports -->
+      <template id="report_assests_common" inherit_id="report.assets_common">
+          <xpath expr="." position="inside">
+              <link href="/web/static/lib/fontawesome/css/font-awesome.css" rel="stylesheet"/>
+              <link href="/base/static/src/css/description.css" rel="stylesheet"/>
+          </xpath>
+      </template>
+
+      <!--This is important workaround to achieve transparency for watermark reports -->
+      <template id="minimal_layout" inherit_id="report.minimal_layout">
+          <xpath expr="//body" position="attributes">
+              <attribute name="style">background-color:transparent;</attribute>
+          </xpath>
+      </template>
+
+    <template id="company_address" name="Company Address">
+              <div t-field="company.name" t-attf-style="color:{{style.name_color}};white-space:nowrap;font-size:{{style.header_font+6}}px;font-weight:500;"/>
+	      <div t-field="company.partner_id" style="margin-bottom:0px; padding-bottom:0px;white-space:nowrap;" 
+                  t-field-options='{"widget": "contact", "fields": ["address", "phone", "fax", "email", "website"], "no_marker": false}'/>                                      <p style="margin-bottom:0px; padding-top:0px;"><span t-if="company.vat">TRN#: <span t-field="company.vat"/></span></p>
+    </template>
+</data>
+</openerp>
+
