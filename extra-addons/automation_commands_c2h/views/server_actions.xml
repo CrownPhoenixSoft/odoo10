@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+
+
+    <!-- server action to the one above -->
+
+    <record model="ir.actions.server" id="archive_reordering_rules_and_product">
+      <field name="name">Archive R rules and Products</field>
+      <field name="model_id" ref="model_product_template"/>
+      <field name="state">code</field>
+      <field name="code">
+        model.archive_reordering_rules_and_produces()
+      </field>
+    </record>
+
+  </data>
+</odoo>

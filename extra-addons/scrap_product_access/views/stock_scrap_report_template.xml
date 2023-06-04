@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_stock_scrap">
+            <t t-call="report.html_container">
+                <t t-foreach="doc_ids" t-as="o">
+                    <t t-call="report.external_layout">
+                        <div class="page">
+                            <div class="row">
+                                <h3 style="text-align:center">
+                                    <span>Stock Scrap Report # <span t-field="o.name"/> </span>
+                                </h3>
+                            </div>
+                            <div class="row mt32 mb32">
+                                <div class="col-xs-6">
+                                    <strong>Location:</strong>
+                                    <span t-field="o.location_id.display_name"/>
+                                </div> <br/>
+                                <div class="col-xs-6">
+                                    <strong>Scrap Location:</strong>
+                                    <span t-field="o.scrap_location_id.display_name"/>
+                                </div> <br/>
+                                <div class="col-xs-6">
+                                    <strong>Picking:</strong>
+                                    <span t-field="o.picking_id.display_name"/>
+                                </div><br/>
+                                <div class="col-xs-6">
+                                    <strong>Source Document:</strong>
+                                    <span t-field="o.origin"/>
+                                </div><br/>
+                                <div class="col-xs-6">
+                                    <strong>Expected Date:</strong>
+                                    <span t-field="o.date_expected"/>
+                                </div> <br/>
+                                <div class="col-xs-6">
+                                    <strong>Requested By:</strong>
+                                    <span t-field="o.requested_by.name"/>
+                                </div><br/>
+                                <div class="col-xs-6">
+                                    <strong>Approved By:</strong>
+                                    <span t-field="o.approved_by.name"/>
+                                </div><br/>
+                            </div>
+                            <div class="col-xs-12">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th class="text-right">Quantity</th>
+                                            <th class="text-right">Unit Of Measure</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="o.scrap_product_id" t-as="doc">
+                                            <td><span t-field="doc.product_id.display_name"/></td>
+                                            <td  class="text-right">
+                                                <span t-field="doc.scrap_qty"/>
+                                            </td>
+                                            <td  class="text-right">
+                                                <span t-field="doc.product_uom_id"/>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

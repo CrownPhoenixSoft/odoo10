@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim:fdn=3:-->
+<odoo>
+    <data>
+
+        <record id="view_account_move_line_filter_inherit" model="ir.ui.view">
+            <field name="name">Journal Items</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account.view_account_move_line_filter"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//search//filter[@name='receivable']" position="after">
+                    <filter string="Balance Sheet Accounts" name="bsa" domain="[('user_type_id.include_initial_balance', '=',True)]"/>
+                    <filter string="Profit &amp; Loss Accounts" name="pla" domain="[('user_type_id.include_initial_balance', '=',False)]"/>
+                 </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+

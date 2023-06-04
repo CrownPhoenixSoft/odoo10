@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_users_form_inherited" model="ir.ui.view">
+            <field name="name">view.users.form.inherited</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook//page[2]/group" position="inside">
+                    <group name="default_values" string="Default Config.">
+                        <field name="default_customer_id"/>
+                        <field name="default_payment_journal_id"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_users_form_simple_modif_inherited" model="ir.ui.view">
+            <field name="name">view.users.form.simple.modif.inherited</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[2]" position="before">
+                    <group name="default_values" string="Default Config.">
+                        <field name="default_customer_id" readonly="0"/>
+                        <field name="default_payment_journal_id" readonly="0"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+     
+     <!-- Action Window -->
+     
+     <act_window  id="action_list_leave_to_approve"  
+        name="Leaves to Approve"  
+        res_model="hr.holidays"
+        view_mode="tree,form"
+        domain="['|',['state','=','confirm'],['state','=','validate1']]" 
+        />
+        
+        <act_window  id="action_list_sale_to_approve"  
+        name="Sales Orders to Approve"  
+        res_model="sale.order"
+        view_mode="tree,form"  
+        domain="[('state','=','waiting')]"
+        />
+        
+        <act_window  id="action_list_purchase_to_approve"  
+        name="Purchase Orders to Approve"  
+        res_model="purchase.order"
+        view_mode="tree,form"  
+        domain="[['state','=','to approve']]"
+        />
+        
+        <act_window  id="action_list_hr_expense_sheet_submit"  
+        name="HR Expense Sheet Submitted"  
+        res_model="hr.expense.sheet"
+        view_mode="tree,form"
+        domain="[('state','=','submit')]"
+        />
+        
+        <act_window  id="action_list_internaltf_to_approve"  
+        name="Internal Transfer to Approve"  
+        res_model="stock.picking"
+        view_mode="tree,form"  
+        domain="[('state','=','draft')]"
+        />
+        
+        <act_window  id="action_list_payslip_to_approve"  
+        name="Payslip to Approve"  
+        res_model="hr.payslip"
+        view_mode="tree,form"  
+        domain="[('state','=','draft')]"
+        />
+        
+        <act_window  id="action_list_scrap_to_approve"  
+        name="Scrap to Approve"  
+        res_model="stock.scrap"
+        view_mode="tree,form"  
+        domain="[('state','=','waiting')]"
+        />
+        
+<!--         <act_window  id="action_list_task_to_approve"  
+        name="Tasks to Approve"  
+        res_model="project.task"
+        view_mode="tree,form"  
+        />  
+ -->    
+   	<!-- Main Menu -->
+   	 	<menuitem  
+   	 	id="menu_main_to_approve"  
+        name="To Approve"  
+        sequence="5"
+        web_icon="oneclick_approve,static/description/icon.png"
+        groups="base.group_erp_manager"
+         />
+   
+   	
+   	<!-- Sub Menu -->
+   	
+  	 	<menuitem  id="leave_to_apporve"  
+        name="Leaves to Approve"  
+        action="action_list_leave_to_approve" 
+        parent="menu_main_to_approve"
+        sequence="10" />
+   
+   	
+   		<menuitem  id="sale_to_apporve"  
+        name="Sales Order to Approve"  
+        action="action_list_sale_to_approve" 
+        parent="menu_main_to_approve"
+        sequence="20" />
+        
+        <menuitem  id="purchase_to_apporve"  
+        name="Purchase Order to Approve"  
+        action="action_list_purchase_to_approve" 
+        parent="menu_main_to_approve"
+        sequence="30" />
+        
+        <menuitem  id="hr_expense_sheet_submit"  
+        name="HR Expenses to Approve"  
+        action="action_list_hr_expense_sheet_submit" 
+        parent="menu_main_to_approve"
+        sequence="40" />
+        
+        <menuitem  id="internaltf_to_apporve"  
+        name="Internal Transfer to Approve"  
+        action="action_list_internaltf_to_approve" 
+        parent="menu_main_to_approve"
+        sequence="50" />
+        
+        <menuitem  id="payslip_to_apporve"  
+        name="Payslip to Approve"  
+        action="action_list_payslip_to_approve" 
+        parent="menu_main_to_approve"
+        sequence="50" />
+        
+        <menuitem  id="scrap_to_apporve"  
+        name="Scrap to Approve"  
+        action="action_list_scrap_to_approve" 
+        parent="menu_main_to_approve"
+        sequence="50" />
+        
+<!--         <menuitem  id="task_to_apporve"  
+        name="Tasks to Approve"  
+        action="action_list_task_to_approve" 
+        parent="menu_main_to_approve"
+        sequence="60" />
+ -->   
+ 		<menuitem action="hr.open_view_employee_list_my" id="hr.menu_open_view_employee_list_my"
+		sequence="3" parent="hr.menu_hr_main" groups="hr.group_hr_manager"/>
+
+	<record id="action_hr_employee_employee" model="ir.actions.act_window">
+		<field name="name">My Profile</field>
+		<field name="res_model">hr.employee</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">kanban,tree,form</field>
+		<field name="domain">[('user_id.id','=', uid)]</field>
+		<field name="context">{}</field>
+		<field name="view_id" eval="False" />
+		<field name="search_view_id" ref="hr.view_employee_filter" />
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				Click to add a new employee.
+			</p>
+			<p>
+				With just a quick glance on the Odoo employee screen, you
+				can easily find all the information you need for each person;
+				contact data, job position, availability, etc.
+			</p>
+		</field>
+	</record>
+
+	<menuitem action="action_hr_employee_employee" id="menu_action_hr_employee"
+		sequence="3" parent="hr.menu_hr_main" groups="base.group_user"/>
+
+	<record id="action_hr_employee_officer" model="ir.actions.act_window">
+		<field name="name">My Team</field>
+		<field name="res_model">hr.employee</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">kanban,tree,form</field>
+		<field name="domain">['|',('parent_id.user_id.id', '=', uid),('coach_id.user_id.id', '=', uid)]</field>
+		<field name="context">{}</field>
+		<field name="view_id" eval="False" />
+		<field name="search_view_id" ref="hr.view_employee_filter" />
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				Click to add a new employee.
+			</p>
+			<p>
+				With just a quick glance on the Odoo employee screen, you
+				can easily find all the information you need for each person;
+				contact data, job position, availability, etc.
+			</p>
+		</field>
+	</record>
+
+	<menuitem action="action_hr_employee_officer" id="menu_action_hr_employee_officer"
+		sequence="3" parent="hr.menu_hr_main" groups="base.group_user"/>
+   
+   
+   
+    </data>
+</odoo>

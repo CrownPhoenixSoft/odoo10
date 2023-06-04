@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data>
+
+<!-- Bank Reconciliation Report pdf -->
+	<record model="ir.actions.report.xml" id="bank_reconciliation_report">
+		<field name="name">Bank Reconciliation Report</field>
+		<field name="model">bank.reconcil.rep</field>
+		<field name="report_type">qweb-pdf</field>
+		<field name="report_name">skit_bank_reconcil.reconcil_report</field>
+	</record>
+
+	<report 
+		model="bank.reconcil.rep" 
+		id="action_bank_reconciliation_report" 
+		name="skit_bank_reconcil.reconcil_report" 
+		file="skit_bank_reconcil.reconcil_report" 
+		report_type="qweb-pdf" menu="False" string="Bank Reconciliation"
+	/>
+	
+	</data>
+	</odoo>

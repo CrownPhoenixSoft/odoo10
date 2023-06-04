@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="action_account_moves_all_a" model="ir.actions.act_window">
+            <field name="context">{'journal_type':'general'}</field>
+            <field name="name">Journal Items</field>
+            <field name="res_model">account.move.line</field>
+            <field name="view_id" ref="account.view_move_line_pivot"/>
+            <field name="view_mode">pivot,tree</field>
+        </record>
+
+<!--         <menuitem id="menu_journal_reporting" -->
+<!--             name="Reporting" groups="account.group_account_manager" -->
+<!--             parent="account.account_account_menu"/> -->
+        <menuitem id="menu_journal_items"
+            name="GL Analysis" action="menu_journal_items.action_account_moves_all_a"
+            parent="account.account_reports_business_intelligence_menu"/>
+	</data>
+</odoo>

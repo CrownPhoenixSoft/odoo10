@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="product_approve_mail_template" model="mail.template">
+            <field name="name">Product Approve Request</field>
+            <field name="email_from">${ctx['email_from']|safe}</field>
+            <field name="subject">Product Approve ${object.name}</field>
+            <field name="email_to">${ctx['product_manager_email']}</field>
+            <field name="lang">${object.lang}</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="report_name">Blank</field>
+            <field name="body_html"><![CDATA[
+                Hello,
+
+                <p>New product <b>'${ctx["product_name"]}'</b> created by ${ctx['user_name']} in ${user.company_id.name}.</p>
+
+                <p> To accept, Refuse or view the product, click on the following link:</p>
+                <div style="text-align: center; margin-top: 16px;">
+                     <a href="${ctx['action_url']}" style="padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px">Approve, Refuse or View Product</a>
+                </div>
+                <p>Best regards,</p>
+            ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

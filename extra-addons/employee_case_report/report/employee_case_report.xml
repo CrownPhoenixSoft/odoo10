@@ -1,0 +1,177 @@
+<odoo>
+    <template id="report_employee_case">
+        <t t-call="report.html_container">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <b>
+                        <h1 style="text-align:right;font-style: italic;">
+                            <t t-esc="docs.name"/>
+                        </h1>
+                    </b>
+                    <b>
+                        <h1 style="text-align:center;font-style: italic;">Employee Case Report</h1>
+                    </b>
+                    <div name="Officers Section" groups="employee_case_report.group_officer">
+                        <h2>Officers</h2>
+                        <table class="table table-striped table table-bordered" style="white-space: nowrap;"
+                        >
+                            <tr style="background-color:#ADD8E6;">
+                                <th>Officer Name</th>
+                                <th>Related Sale Order</th>
+                                <th>Related Customer</th>
+                                <th>Case Date</th>
+                                <th>Created Reason</th>
+                                <th>Damage Amount</th>
+                                <th>Company</th>
+                                <th>Department</th>
+                            </tr>
+                            <tr style="white-space: nowrap;">
+                                <td>
+                                    <t t-esc="docs.officer_user_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.sale_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.partner_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.case_date"/>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.created_reason"/>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.damage_amount"/>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.company_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.department_id.name"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br></br>
+                    <div name="Employees Section" groups="employee_case_report.group_employee">
+                        <h2>Employees</h2>
+                        <table class="table table-striped table table-bordered" style="white-space: nowrap;"
+                        >
+                            <tr style="background-color:#ADD8E6;">
+                                <th>Employee Name</th>
+                                <th style="text-align:center;">Employee IDs</th>
+                                <th>Response Date</th>
+                                <th>Employee Response</th>
+                            </tr>
+                            <tr style="white-space: nowrap;">
+                                <td>
+                                    <t t-esc="docs.employee_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-foreach="docs.employee_ids" t-as="employee">
+                                        <t t-esc="employee.name +','"/>
+                                    </t>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.response_date"/>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.employee_response"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br></br>
+                    <div name="Managers Section" groups="employee_case_report.group_manager">
+                        <h2>Managers</h2>
+                        <table class="table table-striped table table-bordered" style="white-space: nowrap;"
+                        >
+                            <tr style="background-color:#ADD8E6;">
+                                <th>Manager Name</th>
+                                <th>Action Type</th>
+                                <th>Action Date</th>
+                                <th>Manager Response</th>
+                            </tr>
+                            <tr style="white-space: nowrap;">
+                                <td>
+                                    <t t-esc="docs.manager_user_id.name"/>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.action_type"/>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.action_date"/>
+                                </td>
+                                <td>
+                                    <t t-esc="docs.manager_response"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br></br>
+                    <div name="Signatures Section">
+                        <h2 style="text-align:center;">Signatures</h2>
+                        <table class="table table-striped table table-bordered" style="white-space: nowrap;">
+                            <tr style="background-color:#ADD8E6;">
+                                <th>Employee Signature</th>
+                                <th>Officer Signature</th>
+                                <th>Manager Signature</th>
+                            </tr>
+                            <tr style="white-space: nowrap;">
+                                <td>
+                                    <t t-esc="'*' + docs.employee_id.name +'*:'"/>
+                                    <br></br>
+                                    <br></br>
+                                </td>
+                                <td>
+                                    <t t-if="docs.officer_user_id.name">
+                                        <t t-esc="'*' + docs.officer_user_id.name +'*:'"/>
+                                    </t>
+                                    <t t-else="">
+                                    </t>
+                                    <br></br>
+                                    <br></br>
+                                </td>
+                                <td>
+                                    <t t-if="docs.manager_user_id.name">
+                                        <t t-esc="'*' + docs.manager_user_id.name +'*:'"/>
+                                    </t>
+                                    <t t-else="">
+                                    </t>
+                                    <br></br>
+                                    <br></br>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br></br>
+                    <div name="Remarks Section">
+                        <h2 style="text-align:center;">Remarks</h2>
+                        <table class="table table-striped table table-bordered" style="white-space: nowrap;">
+                            <tr style="background-color:#ADD8E6;">
+                                <th>Employee Remarks</th>
+                                <th>Officer Remarks</th>
+                                <th>Manager Remarks</th>
+                            </tr>
+                            <tr style="white-space: nowrap;">
+                                <td>
+                                    <br></br>
+                                    <br></br>
+                                </td>
+                                <td>
+                                    <br></br>
+                                    <br></br>
+                                </td>
+                                <td>
+                                    <br></br>
+                                    <br></br>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

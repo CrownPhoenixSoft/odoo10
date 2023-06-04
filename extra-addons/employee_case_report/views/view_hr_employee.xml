@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="inherit_hr_employee_view" model="ir.ui.view">
+        <field name="name">hr.employee.inherit.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="object" name="display_employee_case_count"
+                        icon="fa-money">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="case_report_count" widget="statinfo" nolabel="1"/> /
+                            <field name="damage_amount" widget="statinfo" nolabel="1"/>
+                        </span>
+                        <span class="o_stat_text">Case Report
+                        </span>
+                    </div>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+       
+<templates id="template" xml:space="preserve">
+     <t t-name="WKDebug">
+        <li class="o_mail_navbar_item o_no_notification ">
+            <a class="oe_activate_debug_mode oe_right label "  title="Open Debug Mode" href="?debug">
+                  <span class="fa fa-code"/>
+            </a>          
+        </li>
+    </t>
+</templates>

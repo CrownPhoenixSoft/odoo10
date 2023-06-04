@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_discount_config_margin" model="ir.ui.view">
+            <field name="name">discount.config</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="sale_discount_total.view_discount_config"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group[7]" position="after">
+                    <group>
+                        <label for="id" string="Margin"/>
+                        <div>
+                            <div>
+                                <field name="less_margin_approval" class="oe_inline"/>
+                                <label for="less_margin_approval"/>
+                            </div>
+                            <div>
+                                <label for="at_least_margin"/>
+                                <field name="at_least_margin" attrs="{'required': [('less_margin_approval','=',True)]}"
+                                       class="oe_inline"/>
+                            </div>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

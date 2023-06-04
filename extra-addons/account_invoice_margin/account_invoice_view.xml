@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2015-2017 Akretion (http://www.akretion.com/) @author: Alexis de Lattre 
+	<alexis.delattre@akretion.com> License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+	<record id="view_invoice_line_form" model="ir.ui.view">
+		<field name="name">margin.account.invoice.line.form</field>
+		<field name="model">account.invoice.line</field>
+		<field name="inherit_id" ref="account.view_invoice_line_form" />
+		<field name="arch" type="xml">
+			<field name="discount" position="after">
+				<field name="standard_price_company_currency" groups="account.group_account_user" />
+				<field name="standard_price_invoice_currency" widget="monetary"
+					options="{'currency_field': 'currency_id'}" groups="account.group_account_user" />
+				<field name="margin_invoice_currency" groups="account.group_account_user" />
+				<field name="margin_company_currency" groups="account.group_account_user" />
+			</field>
+		</field>
+	</record>
+
+	<record id="invoice_form" model="ir.ui.view">
+		<field name="name">margin.account.invoice.form</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.invoice_form" />
+		<field name="arch" type="xml">
+			<field name="move_id" position="after">
+				<field name="margin_invoice_currency" string="Margin"
+					groups="account.group_account_user" />
+				<field name="margin_company_currency" groups="account.group_account_user" />
+			</field>
+			<xpath
+				expr="//field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']"
+				position="after">
+				<field name="standard_price_invoice_currency" groups="base.group_no_one"
+					widget="monetary" options="{'currency_field': 'currency_id'}" />
+				<field name="standard_price_company_currency" groups="base.group_no_one"
+					widget="monetary" options="{'currency_field': 'company_currency_id'}" />
+				<field name="margin_invoice_currency" groups="base.group_no_one" />
+				<field name="margin_company_currency" groups="base.group_no_one" />
+				<field name="margin_rate" groups="base.group_no_one" />
+				<field name="company_currency_id" invisible="1" />
+			</xpath>
+		</field>
+	</record>
+	<record id='view_account_invoice_report_pivot_inherit_id' model="ir.ui.view">
+		<field name="name">account.invoice.report.pivot</field>
+		<field name="model">account.invoice.report</field>
+		<field name="inherit_id" ref="account.view_account_invoice_report_pivot"/>
+		<field name="arch" type="xml">
+			<pivot string="Invoices Analysis" disable_linking="True">
+				<field name="margin_company_currency" type="measure" />
+			</pivot>
+		</field>
+	</record>
+</odoo>

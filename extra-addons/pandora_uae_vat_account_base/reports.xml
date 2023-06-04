@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            id="report_account_invoice_thermal"
+            string="Print Thermal Invoice"
+            model="account.invoice"
+            report_type="qweb-pdf"
+            file="pandora_uae_vat_account_base.account_invoice_thermal_report_template"
+            name="pandora_uae_vat_account_base.account_invoice_thermal_report_template"
+            menu="True"/>
+
+        <record id="paperformat_thermal_receipt_pdf" model="report.paperformat">
+            <field name="name">Thermal Invoice Paper-format</field>
+            <field name="default" eval="True" />
+            <field name="format">custom</field>
+            <field name="page_height">297</field>
+            <field name="page_width">80</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">1</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(6,0,[ref('pandora_uae_vat_account_base.report_account_invoice_thermal')])]"/>
+        </record>
+
+    </data>
+</odoo>

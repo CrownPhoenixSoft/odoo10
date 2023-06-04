@@ -1,0 +1,3 @@
+<odoo>
+    <menuitem name="Employee Case Report" id="menu_employee_case_report" parent="hr.menu_hr_root" action="employee_case_report_action_window"/>
+</odoo>

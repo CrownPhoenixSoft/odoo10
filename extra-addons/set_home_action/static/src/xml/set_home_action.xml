@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+       
+<templates id="template" xml:space="preserve">
+     <t t-name="set_home_action_tmpl">
+        <li class="o_mail_navbar_item o_no_notification ">
+            <a class="oe_set_home_action oe_right label" title="Set Home Action">
+                <span class="fa fa-home"/>
+            </a>          
+        </li>
+    </t>
+</templates>

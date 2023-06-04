@@ -1,0 +1,15 @@
+FROM odoo:10.0
+
+USER root
+
+# RUN apt install python-pypdf pypdf2
+
+RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py \
+    && python get-pip.py --force-reinstall \
+    && python -m pip install --upgrade "pip < 21.0"
+
+# RUN pip install num2words PyPDF2 pypdf2
+
+# USER odoo
+
+RUN pip install num2words PyPDF2 pypdf2

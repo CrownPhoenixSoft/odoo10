@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+
+        <record id="view_account_payment_from_invoices_inherited" model="ir.ui.view">
+            <field name="name">account.register.payments.wizard</field>
+            <field name="model">account.register.payments</field>
+            <field name="inherit_id" ref="account.view_account_payment_from_invoices"/>
+            <field name="arch" type="xml">
+                <xpath expr="//footer//button[@name='create_payment']" position="after">
+                    <button string="Validate and print" name="validate_and_print"
+                        type="object" class="btn-primary"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="invoice_form_invoice_pay" model="ir.ui.view">
+            <field name="name">invoice.form.pay.and.print</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header" position="inside">
+                    <button name="pay_and_print" string="Pay and Print" class="oe_highlight" type="object" groups="account.group_account_invoice" attrs="{'invisible':[('state','!=','open')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

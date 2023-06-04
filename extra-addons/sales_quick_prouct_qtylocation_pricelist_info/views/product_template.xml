@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <record id="product_page_auto_focus_form" model="ir.ui.view">
+            <field name="name">product tempalte</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                   <xpath expr="//page[@name='sales']" position="attributes">
+                             <attribute name="autofocus">True</attribute>   
+                    </xpath>
+            </field>
+         </record>
+      </data>
+</odoo>

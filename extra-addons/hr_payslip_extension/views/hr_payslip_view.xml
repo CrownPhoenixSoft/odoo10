@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <!--Tree-->
+    <record id="view_tree_hr_payslip" model="ir.ui.view">
+        <field name="name">hr.payslip.view.tree.payslip.extension.inherit</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_to']" position="after">
+                <field name="amount_gross"/>
+                <field name="amount_net"/>
+            </xpath>
+            <xpath expr="//field[@name='payslip_run_id']" position="after">
+                <button string="Confirm" name="action_payslip_done" type="object" states="draft" class="oe_highlight"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--Form-->
+    <record id="view_form_hr_payslip" model="ir.ui.view">
+        <field name="name">hr.payslip.view.form.payslip.extension.inherit</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div[@class='oe_title']" position="before">
+                <field name="employee_image" widget='image' class="oe_avatar"/>
+            </xpath>
+            <xpath expr="//field[@name='credit_note']" position="after">
+                <field name="create_uid" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']" position="after">
+                <button string="(Click to update Gross and Net)" name="update_line_ids" type="object" states="draft" class="oe_link pull-right oe_edit_only"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

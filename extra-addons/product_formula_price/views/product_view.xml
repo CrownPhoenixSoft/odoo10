@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="product_template_only_form_view_inherited_aspl"
+			model="ir.ui.view">
+			<field name="name">product.template.product.form</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_form_view" />
+			<field name="arch" type="xml">
+			    <xpath expr="//field[@name='item_ids']" position="attributes">
+			         <attribute name="context">{'default_base':'list_price', 'default_applied_on' :'1_product',
+			                                     'default_product_tmpl_id': active_id}</attribute>
+			    </xpath>
+				<xpath expr="//field[@name='item_ids']//tree" position="replace">
+				     <tree string="Pricelist Items" editable="bottom">
+				           <field name="compute_price" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                           <field name="pricelist_id" string="Pricelist" required='1'/>
+                           <field name="price" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                           <field name="fixed_price" string="Fix Price" required='1' groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                           <field name="min_quantity" readonly="True" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                           <field name="base" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+						   <field name="base_pricelist_id" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                           <field name="price_surcharge" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/> 
+                           <field name="amount_pricelist" string="Calculated Price"/>
+                           <field name="date_start" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                           <field name="date_end" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                           <field name="applied_on" invisible="1"/>
+                    </tree>
+				</xpath>
+			</field>
+		</record>
+        <record id="product_normal_only_form_view_inherited_aspl" model="ir.ui.view">
+            <field name="name">product.product.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <field name="pricelist_item_ids"></field>
+                <xpath expr="//field[@name='pricelist_item_ids']//tree" position="replace">
+                    <tree string="Pricelist Items">
+                            <field name="compute_price" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                            <field name="pricelist_id"/>
+                            <field name="price" string="Price" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                            <field name="name" string="Applicable On" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                            <field name="min_quantity" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                            <field name="date_start" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                            <field name="date_end" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                            <field name="base" invisible="1" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                            <field name="price_surcharge" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                            <field name="amount_pricelist" string="Calculated Price"/>
+                            <field name="sequence" invisible="1" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                            <field name="price_discount" invisible="1" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                            <field name="applied_on" invisible="1" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                            <field name="compute_price" invisible="1" groups="purchase.group_purchase_user,purchase.group_purchase_manager"/>
+                        </tree>   
+                </xpath>
+            </field>
+        </record>
+
+	</data>
+</odoo>
+    

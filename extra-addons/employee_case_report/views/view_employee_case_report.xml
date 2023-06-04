@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="employee_case_report_list">
+            <field name="name">employee_case_report list</field>
+            <field name="model">employee_case_report.employee_case_report</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="case_date"/>
+                    <field name="employee_id"/>
+                    <field name="damage_amount"/>
+                    <field name="status"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Form view definition -->
+        <record model="ir.ui.view" id="employee_case_report_form">
+            <field name="name">employee_case_report form</field>
+            <field name="model">employee_case_report.employee_case_report</field>
+            <field name="arch" type="xml">
+                <form string="Employee Case Report">
+                    <header>
+                        <field name="status" widget="statusbar"/>
+                        <button name="submit_response" type="object" string="Submit Case" class="btn-primary"
+                                groups="employee_case_report.group_employee"
+                                attrs="{'invisible':[ ('status','!=','draft') ]}"/>
+                        <button name="approve" type="object" string="Approve" class="btn-primary"
+                                attrs="{'invisible':[ ('status','!=','waiting_manager_action') ]}"
+                        />
+                        <button name="change_to_done" type="object" string="Done" class="btn-primary"
+                                attrs="{'invisible':[ ('status','!=','accountant_action') ]}"
+                                groups="employee_case_report.group_officer"
+                        />
+                        <button name="reset_to_draft" type="object" string="Reset To Draft"
+                                attrs="{'invisible':[ ('status','!=','cancelled') ]}"
+                        />
+                        <button name="reject" type="object" string="Reject"
+                                attrs="{'invisible':[ ('status','!=','waiting_manager_action') ]}"/>
+                        <button name="submit_employee_response" type="object" string="Submit Response"
+                                attrs="{'invisible':[ ('status','!=','waiting_response') ]}"
+                        />
+                        <button name="print_pdf_report" type="object" string="Print PDF Report"/>
+                    </header>
+                    <sheet>
+                        <group name="Sequence">
+                            <field name="name" nolabel="1" readonly="1" style="font-size: 21px;font-weight: bold;"/>
+                        </group>
+                        <group name="officer" string="Officer">
+                            <field name="officer_user_id" attrs="{'readonly':[('status','!=','draft')]}"/>
+                            <field name="sale_id" attrs="{'readonly':[('status','!=','draft')]}"/>
+                            <field name="partner_id" attrs="{'readonly':[('status','!=','draft')]}"/>
+                            <field name="case_date" readonly="1"/>
+                            <field name="employee_id" attrs="{'readonly':[('status','!=','draft')]}"/>
+                            <field name="employee_ids" widget="many2many_tags"
+                                   attrs="{'readonly':[('status','!=','draft')]}"/>
+                            <field name="created_reason" attrs="{'readonly':[('status','!=','draft')]}"/>
+                            <field name="damage_amount" attrs="{'readonly':[('status','!=','draft')]}"/>
+                            <field name="company_id" readonly="1"/>
+                            <field name="department_id" attrs="{'readonly':[('status','!=','draft')]}"/>
+                        </group>
+                        <group name="employee" string="Employee">
+                            <field name="response_date" readonly="1"/>
+                            <field name="employee_response"
+                                   attrs="{'readonly':[('status','!=','waiting_response')]}"/>
+                        </group>
+                        <group name="manager" string="Manager">
+                            <field name="manager_user_id"
+                                   attrs="{'readonly':[('status','!=','waiting_manager_action')]}"/>
+                            <field name="action_type" widget="radio"
+                                   attrs="{'readonly':[('status','!=','waiting_manager_action')]}"/>
+                            <field name="action_date"/>
+                            <field name="manager_response"
+                                   attrs="{'readonly':[('status','!=','waiting_manager_action')]}"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

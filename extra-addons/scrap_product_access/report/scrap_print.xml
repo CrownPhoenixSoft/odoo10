@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+        <report
+                id="print_stock_scrap_id"
+                model="stock.scrap"
+                string="Scrap Report"
+                report_type="qweb-pdf"
+                name="scrap_product_access.report_stock_scrap"
+                file="scrap_product_access.report_stock_scrap"
+        />
+    </data>
+</odoo>

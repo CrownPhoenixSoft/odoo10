@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id='product_margin_saleperson_add_id' model='ir.ui.view'>
+			<field name="name">product.margin</field>
+			<field name="model">product.margin</field>
+			<field name="inherit_id" ref='product_margin.product_margin_form_view'/>
+			<field name="arch" type="xml">
+				<field name="invoice_state" position="after">
+						<field name="user_id"/>
+				</field>
+			</field>
+		</record>
+	</data>
+</odoo>

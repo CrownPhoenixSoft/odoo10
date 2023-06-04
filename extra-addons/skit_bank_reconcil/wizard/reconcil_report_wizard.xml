@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<data>
+<!-- Bank Reconciliation Report Popup Form -->
+	<record id="view_bank_reconciliation" model="ir.ui.view">
+   		<field name="name">bank.reconcil.rep.form</field>
+        <field name="model">bank.reconcil.rep</field>
+        <field name="arch" type="xml">
+            <form string="Bank Reconciliation"> 
+	           <div>
+	            	<p><h5 class="unreconciled">Unreconciled Bank Statement Lines:</h5><span>Bank statement line created or imported but not reconciled with payment.</span></p><br></br>
+	            	<p><h5 class="validate">Validated Payments not linked with a Bank Statement Line:</h5><span>Register Payment or Receipt not reconciled with bank statement.</span></p>
+            	</div> 
+            	<group col="4">
+	                <field name="date_from" string="Start Date"/>
+	                <field name="date_to" string="End Date"/>
+	            </group>
+	            <group>
+	           		<field name="journal_id" string="Journal" required="1"/> 
+	            </group>
+                <footer>
+                <button name="print_report" string="Print" type="object" default_focus="1" class="oe_highlight"/>
+		            <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+         </field>
+    </record>
+    
+    <record id="view_bank_reconciliation_diff" model="ir.ui.view">
+   		<field name="name">bank.reconcil.rep.form</field>
+        <field name="model">bank.reconcil.rep</field>
+        <field name="arch" type="xml">
+            <form string="Bank Reconciliation"> 
+	            <div>
+	            	<p><h5 class="unreconciled">Unreconciled Bank Statement Lines:</h5><span>Bank statement line created or imported but not reconciled with payment.</span></p><br></br>
+	            	<p><h5 class="validate">Validated Payments not linked with a Bank Statement Line:</h5><span>Register Payment or Receipt not reconciled with bank statement.</span></p>
+            	</div>
+            	<group col="4">
+	                <field name="date_from" string="Start Date"/>
+	                <field name="date_to" string="End Date"/>
+	            </group>
+	            <group>
+	            	<field name="journal_id" string="Journal"  invisible="1"/>
+	            </group>
+                <footer>
+                <button name="print_report" string="Print" type="object" default_focus="1" class="oe_highlight"/>
+		            <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+         </field>
+    </record>
+    
+     <!-- Bank Reconciliation Popup --> 
+    <record id="action_bank_reconciliation" model="ir.actions.act_window">
+    	<field name="name">Bank Reconciliation</field>
+        <field name="res_model">bank.reconcil.rep</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    
+    <!--  Bank Reconciliation Menu  -->
+       <menuitem id="menu_action_bank_reconciliation" name="Bank Reconciliation" action="action_bank_reconciliation" parent="account.menu_finance_legal_statement"
+			sequence="10" /> 
+        
+</data>
+</odoo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+         <!-- QWeb Reports -->
+        <report
+            id="hr_holidays_leave_report"
+            model="hr.holidays"
+            menu="True"
+            report_type="qweb-pdf"
+            string="Print Leave/Allocation Request"
+            name="hr_holidays_report.hr_holidays_leave_id"
+            file="hr_holidays_report.hr_holidays_leave_id"
+           />
+        
+        <template id="hr_holidays_leave_id">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="report.internal_layout">
+                         <div class="page">
+                             <div>
+                                 <h3>
+                                     <span t-if="doc.type in ['remove']"><span t-field="doc.type"/></span>
+                                     <span t-if="doc.type in ['add']"><span t-field="doc.type"/></span>
+                                     <span t-if="doc.holiday_type in ['employee']"> - <span t-field="doc.employee_id.name"/></span>
+                                     <span t-if="doc.holiday_type in ['category']"> - <span t-field="doc.category_id.name"/></span>
+                                 </h3>
+                                 <h4>
+                                     <span t-if="doc.type in ['remove']">
+                                        <span t-field="doc.date_from"/> To <span t-field="doc.date_to"/>
+                                     </span>
+                                     [<span t-field="doc.number_of_days_temp"/> Days]
+                                 </h4>
+                             </div>
+                            <table class="table table-responsive">
+                               <tr>
+                                   <td><strong>Reason</strong> </td><td> <span t-field="doc.name"/></td>
+                                   <td><strong>Mode </strong></td>
+                                   <td>
+                                       <span t-field="doc.holiday_type"/>
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td><strong>Leave Type </strong></td><td><span t-field="doc.holiday_status_id.name"/></td>
+                                   <td><strong>Status of Leave </strong></td>
+                                   <td>
+                                       <span t-if="doc.state in ['draft','cancel','confirm','validate','validate1','refuse']"><span t-field="doc.state"/></span>
+                                   </td>
+                               </tr>
+                               <tr>
+                                   <td><strong>Manager </strong></td><td><span t-field="doc.department_id.manager_id.name" /></td>
+                                   <td><strong>Department </strong></td><td><span t-field="doc.department_id.name" /></td>
+                               </tr>
+                            </table>
+                            <div>
+                                 <strong>Comment by Manager :</strong><br/><span t-field="doc.report_note"/>
+                            </div>
+                             <div>
+                              <div class="col-xs-7 pull-right">
+                                <table class="table no-border">
+                                    <tr>
+                                        <td></td><td></td><td><strong>Date :_____________ </strong></td><td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td><td></td><td><strong>Authorised Signature </strong></td><td></td>
+                                    </tr>
+                                </table>
+                              </div>
+                            </div>
+                        </div>
+                </t>
+               </t>
+        </template>
+    </data>
+</openerp>

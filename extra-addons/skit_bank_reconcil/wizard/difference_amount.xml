@@ -1,0 +1,21 @@
+<odoo>
+<record id="account_journal_dashboard_kanban_view_inherited_id" model="ir.ui.view">
+       <field name="name">account.journal.dashboard.kanban</field>
+       <field name="model">account.journal</field>
+       <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view" />
+       <field name="arch" type="xml">
+       <xpath expr="//t[@t-name='JournalBodyBankCash']//div[contains(@class, 'o_kanban_primary_right')]//div[contains(@name,'latest_statement')]" position="after">
+   		<div class="row">
+    		<div class="col-xs-6">
+    			<a type="object"   name="print_report">
+        			<span  title="Difference">Difference</span>
+        		 </a>
+        	</div>
+        	<div class="col-xs-6 text-right">
+        		<span><t t-esc="dashboard.difference"/></span>
+        	</div>
+    	</div>
+       </xpath>
+       </field>
+</record>
+</odoo>

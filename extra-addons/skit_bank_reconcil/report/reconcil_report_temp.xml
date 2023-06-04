@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="reconcil_report">
+		<t t-call="report.html_container">
+			<t t-set="data_report_margin_top" t-value="12" />
+			<t t-set="data_report_header_spacing" t-value="10" />
+			<t t-set="data_report_dpi" t-value="110" />
+			<t t-call="report.external_layout">
+				<div class="page">
+				<div align="center"> 
+		        <h4>Bank Reconciliation Report</h4>
+		         <h5>As of  <span  t-esc="data['date_to']"/></h5>
+				</div>
+					<table class="table table-condensed">
+						 <thead>
+							<tr>
+								<th></th>
+								<th>Date</th>
+								<th>Reference</th>
+								<th>Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>
+							 	<span><h5><strong>Virtual GL Balance</strong></h5></span> 
+							</td>
+							<td><span></span></td>
+							<td><span></span></td>
+							<td class="text-right">
+	                           	<span t-att-style="style" t-esc="virtual_gl_balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+	                        </td>
+						</tr>
+						<tr>
+							<td>
+								<span><h5><strong>Current balance of account </strong><t t-esc="gl_code"/></h5></span> 
+							</td>
+							<td><span></span></td>
+							<td><span></span></td>
+							<td class="text-right">
+	                           <span t-att-style="style" t-esc="current_balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+	                        </td> 
+						</tr>
+						<tr>
+							<td>
+								<span><h5><strong>Operations to Process:</strong></h5></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span><h5><strong>Unreconciled Bank Statement Lines</strong></h5></span>
+							</td>
+						</tr> 
+						<t t-foreach="st_lines_left" t-as="st_line">								
+							<tr>
+								 <td>
+									<span t-esc="st_line['name']"/>  
+								 </td>
+								 <td>
+								 	<span><t t-esc="st_line['date']"/></span>
+								 </td>
+								 <td>
+								 	<span t-esc="st_line['ref']"/>
+								 </td>
+								 <td class="text-right">
+	                           		<span t-att-style="style" t-esc="st_line['amount']" 
+								 			t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+								 </td>
+							</tr>	
+							</t>
+							<tr>
+								<td>
+									<span><h5><strong>Validated Payments not Linked with a Bank Statement Line</strong></h5></span>
+								</td>
+							</tr>
+							<t t-foreach="payment_lines" t-as="pay">								
+								<tr>
+									 <td>
+										<span t-esc="pay['name']"/>  
+									 </td>
+									 <td>
+									 	<span><t t-esc="pay['payment_date']"/></span>
+									 </td>
+									 <td>
+									 	<span t-esc="pay['ref']"/>
+									 </td>
+									  <td class="text-right">
+	                          				<span t-att-style="style" t-esc="pay['amount']"
+									 			t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+									 </td>
+								</tr>	
+							</t>
+							<tr>
+								<td>
+									<span><h5><strong>Last Bank Statement Ending Balance</strong></h5></span> 
+								</td>
+								<td></td>
+								<td></td>
+								<td class="text-right">
+		                           	<span><span t-att-style="style"  t-esc="last_balance" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/></span> 
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span><h5><strong>Unexplained Difference</strong></h5></span> 
+								</td>
+								<td></td>
+								<td></td>
+								<td>
+									<span><span t-esc="0"/></span> 
+								</td>
+							</tr>
+						</tbody> 
+						</table>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>
+	

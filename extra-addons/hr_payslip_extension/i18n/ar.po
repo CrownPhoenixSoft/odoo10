@@ -1,0 +1,21 @@
+
+#. module: hr_payslip_extension
+#: model:ir.model.fields,field_description:hr_payslip_extension.field_hr_payslip_amount_gross
+msgid "GROSS"
+msgstr "كامل الراتب"
+
+#. module: hr_payslip_extension
+#: model:ir.model.fields,field_description:hr_payslip_extension.field_hr_payslip_amount_net
+msgid "NET"
+msgstr "صافي الراتب"
+
+#. module: hr_payslip_extension
+#: model:ir.ui.view,arch_db:hr_payslip_extension.view_tree_hr_payslip
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: hr_payslip_extension
+#: model:ir.ui.view,arch_db:hr_payslip_extension.view_form_hr_payslip
+msgid "(Click to update Gross and Net)"
+msgstr "(انقر لتحديث كامل والصافي)"
+

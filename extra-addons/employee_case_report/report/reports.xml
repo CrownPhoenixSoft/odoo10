@@ -1,0 +1,5 @@
+<odoo>
+    <report id="action_employee_case_report" model="employee_case_report.employee_case_report" string="Employee Case Report"
+            report_type="qweb-pdf" name="employee_case_report.report_employee_case"
+            file="employee_case_report.report_employee_case"/>
+</odoo>

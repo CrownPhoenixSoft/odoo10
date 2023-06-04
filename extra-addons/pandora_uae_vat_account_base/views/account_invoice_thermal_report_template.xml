@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="account_invoice_thermal_report_template">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<div class="row border-bottom: 1px solid;">
+							<center>
+								<img t-if="o.company_id.logo" t-att-src="'data:image/png;base64,%s' % o.company_id.logo"
+									style="max-height: 80px;" />
+							</center>
+							<div class="text-center" style="padding:5px; text-center">
+	                        	<span style="font-size:18px;" t-esc="o.company_id.name"/>
+								<span t-field="o.company_id.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}" style="border-bottom: 1px solid black; display:inline-block;"/>
+
+	                        </div>
+						
+							<t t-if="o.number">
+								<span style="font-weight: bold; font-size:16px;">Invoice No.</span>
+								<span style="font-size:16px;" t-esc="o.number" />
+								<span style="font-weight: bold; font-size:16px; text-align: right;">:فاتورة رقم</span>
+							</t>
+							<br />
+							<t t-if="o.company_id.phone">
+								<span style="font-weight: bold; font-size:16px;">Phone:</span>
+								<span style="font-size:16px;" t-esc="o.company_id.phone" />
+								<span style="font-weight: bold; font-size:16px; text-align: right;">:هاتف</span>
+							</t>
+							<br/>
+							<t t-if="o.date_invoice">
+								<span style="font-weight: bold; font-size:16px;">Date:</span>
+								
+								<span style="font-size:16px;" t-field="o.date_invoice" t-field-options="{'format': 'dd-MM-yyyy'}" />
+								<span style="font-weight: bold; font-size:16px; text-align: right;">:تاريخ</span>
+							</t>
+							<br />
+							<t t-if="o.company_id.vat">
+								<span style="font-weight: bold; font-size:16px;">TRN#:</span>
+								<span style="font-size:16px;" t-esc="o.company_id.vat" />
+								<span style="font-weight: bold; font-size:16px; text-align: right;">: رقم ضريبة</span>
+							</t>
+							
+							
+							<div>
+							<span style="font-weight: bold; font-size:16px;" >Customer:</span>
+							 <t t-if="o.partner_id.parent_id">
+				<span t-field="o.partner_id.parent_id"/>, <span t-if="o.partner_id.title" t-field="o.partner_id.title"/> <span t-field="o.partner_id.name"/>
+				<br/><span t-if="o.partner_id.vat">Customer TRN#/رقم ضريبة: <span t-field="o.partner_id.vat"/></span>
+			      </t>
+			      <t t-if="not o.partner_id.parent_id">
+				<span t-if="o.partner_id.title" t-field="o.partner_id.title"/> <span t-field="o.partner_id" style="font-size:20px"/>
+				<br/><span t-if="o.partner_id.vat">Customer TRN#/رقم ضريبة: <span t-field="o.partner_id.vat"/></span>
+			      </t>
+			    </div>
+							<div class="text-center" style="border-bottom:1px groove black; border-top:1px groove black; height:40px; padding:5px; text-center">
+	                            <span style="font-weight: bold; font-size:24px;" t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid') and (o.amount_tax>0)">Tax Invoice/فاتورة ضريبية</span>
+								<span style="font-weight: bold; font-size:24px;" t-if="o.type == 'out_invoice' and (o.state == 'open' or o.state == 'paid') and (o.amount_tax==0)">Invoice/فاتورة </span>
+                                <span style="font-weight: bold; font-size:24px;" t-if="o.type == 'out_refund' and (o.state == 'open' or o.state == 'paid') and (o.amount_tax>0)">Tax Credit Note</span>
+								<span style="font-weight: bold; font-size:24px;" t-if="o.type == 'out_refund' and (o.state == 'open' or o.state == 'paid') and (o.amount_tax==0)">Credit Note</span>								
+							
+	                        </div>
+							<table style="width:100%">
+								<colgroup>
+									<col width='50%' />
+									<col width='25%' />
+									<col width='25%' />
+								</colgroup>
+								<tr>
+									<th style="font-weight: bold; font-size:20px;">Description</th>
+									<th style="font-weight: bold; font-size:20px;text-align:center; ">Qty</th>
+									<!-- <th style="font-weight: bold; font-size:20px;">Dis%</th> -->
+									<th style="text-align: right; font-weight: bold; font-size:20px;">Amount</th>
+								</tr>
+								<tr>
+									<th
+										style="border-bottom: 1px solid;font-weight: normal; font-size:20px;">وصف</th>
+									<th
+										style="border-bottom: 1px solid;font-weight: normal; font-size:20px;text-align:center; ">كمية</th>
+									<!-- 	<th
+										style="border-bottom: 1px solid;font-weight: normal; font-size:20px;">خصم</th> -->
+									<th
+										style="text-align: right;border-bottom: 1px solid;font-weight: normal; font-size:20px;">مبلغ</th>
+								</tr>
+								<tr style="border-bottom: 1px dotted gray;" t-foreach="o.invoice_line_ids"
+									t-as="l">
+									<td style="font-size:16px;">
+										<t t-esc="l.name" />
+									</td>
+									<td style="text-align:center; font-size:16px;">
+										<t t-esc="l.quantity" />
+									</td>
+									<!-- <td style="text-align:center; font-size:16px;">
+										<t t-esc="l.discount" />
+									</td> -->
+									<td style="text-align:right; font-size:16px;">
+										<t t-esc="l.price_subtotal+l.tax_amount"
+											t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+									</td>
+								</tr>
+							</table>
+
+							<br />
+							<table>
+								<colgroup>
+									<col width='75%' />
+									<col width='25%' />
+								</colgroup>
+								<tr>
+									<td style="border-bottom: 1px groove; font-size:20px;">Total before VAT <br/> السعر قبل ضريبة</td>
+									<td
+										style="border-bottom: 1px groove; text-align:right; font-size:20px;">
+										<span t-field="o.amount_untaxed"
+											t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom: 1px groove; font-size:20px; ">VAT <br/>ضريبة</td>
+									<td
+										style="border-bottom: 1px groove; text-align:right; font-size:16px; ">
+										<span t-field="o.amount_tax"
+											t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+									</td>
+								</tr>
+								<tr>
+									<td style="border-bottom: 1px groove; font-size:20px; ">Total <br/>مجموع</td>
+									<td
+										style="border-bottom: 1px groove;  text-align:right; font-size:20px; font-weight: bold;">
+										<span t-field="o.amount_total"
+											t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+									</td>
+                                
+
+								</tr>
+							</table>
+							<br />
+							<span style="font-size:20px;">
+								
+								<span t-if="o.type == 'out_invoice' and (o.state == 'open')" ><center>Invoice Unpaid</center></span>
+                                <span t-if="o.type == 'out_invoice' and (o.state == 'paid')" ><center>Invoice Paid</center></span>
+								<br />
+								<br />
+				<center>
+
+								Powered By: clicktohub.com</center>
+							</span>
+						</div>
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

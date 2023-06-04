@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_picking_cancel_extended
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-11 09:10+0000\n"
+"PO-Revision-Date: 2017-12-11 10:11+0100\n"
+"Last-Translator: Ignacio Ibeas - Acysos S.L. <ignacio@acysos.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#. module: stock_picking_cancel_extended
+#: view:stock.picking:stock_picking_cancel_extended.view_picking_inherit_picking_cancel_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: stock_picking_cancel_extended
+#: code:addons/stock_picking_cancel_extended/stock.py:38
+#, python-format
+msgid "Picking '%s' has been set in draft state."
+msgstr "El albarán '%s' se ha cambiado a estado borrador."
+
+#. module: stock_picking_cancel_extended
+#: model:ir.model,name:stock_picking_cancel_extended.model_stock_picking
+msgid "Picking List"
+msgstr "Albarán"
+
+#. module: stock_picking_cancel_extended
+#: view:stock.picking:stock_picking_cancel_extended.view_picking_inherit_picking_cancel_form
+msgid "Set To Draft"
+msgstr "Cambiar a borrador"
+
+#. module: stock_picking_cancel_extended
+#: model:ir.model,name:stock_picking_cancel_extended.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	
+		<record id="invoice_bill_smart_button" model="ir.ui.view">
+			<field name="name">Invoice Bill Smart Button</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_supplier_form" />
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/div[1]" position="before">
+					<div class="oe_button_box" name="button_box1">
+						<button name="action_view_po" type="object" class="oe_stat_button"
+							icon="fa-pencil-square-o" string="Source Document">
+						</button>
+					</div>
+				</xpath>
+			</field>
+		</record>
+		
+		<record id="invoice_sale_smart_button" model="ir.ui.view">
+			<field name="name">Invoice Sale Smart Button</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_form" />
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/label[1]" position="before">
+					<div class="oe_button_box" name="button_box1">
+						<button name="action_view_saleorder" type="object" class="oe_stat_button"
+							icon="fa-pencil-square-o" string="Source Document">
+						</button>
+					</div>
+				</xpath>
+			</field>
+		</record>
+		
+	</data>
+</odoo>

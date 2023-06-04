@@ -1,0 +1,3 @@
+<odoo>
+    <report id="action_product_qr_report" model="product.template" string="QR Code Report" report_type="qweb-pdf" name="product.report_product_qr" file="product.report_product_qr"/>
+</odoo>

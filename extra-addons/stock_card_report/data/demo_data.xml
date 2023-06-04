@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+         <act_window id="act_action_display_product_stock_card"
+                name="Stock Card"
+                res_model="stock.card.report.wizard"
+                src_model="product.product"
+                view_mode="form"
+                context="{
+                    'default_receivable_accounts_only':1,
+                    'default_payable_accounts_only':1,
+                    }"
+                groups="account.group_account_manager"
+                key2="client_action_multi"
+                target="new" />
+
+    </data>
+</odoo>

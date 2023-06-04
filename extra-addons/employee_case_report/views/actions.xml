@@ -1,0 +1,10 @@
+<odoo>
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="employee_case_report_action_window">
+        <field name="name">Employee Case Report Action</field>
+        <field name="res_model">employee_case_report.employee_case_report</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

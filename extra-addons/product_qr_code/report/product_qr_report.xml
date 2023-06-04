@@ -1,0 +1,64 @@
+<odoo>
+
+    <template id="product_template_external_layout">
+        <t t-call="report.html_container">
+            <div class="header row">
+                <div class="col-1" style="text-align:center;">
+                    <img t-attf-src='data:image/png;base64,{{request.env.user.company_id.logo}}' name="image" alt="Logo" style="width: 100px; margin-left: -20px; margin-top:2px;"/>
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-6" style="margin-top: 11px;">
+                    <center>
+                        <span style="color: black; font-size: 20px;">
+                            <strong>
+                                <span t-field="docs.company_id.name"/>
+                            </strong>
+                            <br/>
+                            <span style="color: black; font-size: 18px;" t-field="docs.company_id.street"/>
+,
+                            <span style="color: black; font-size: 18px;" t-field="docs.company_id.city"/>
+                            <br/>
+                            <span style="color: black; font-size: 18px;" t-field="docs.company_id.country_id.name"/>
+                            <br/>
+                            <span style="font-size: 13px;">
+                                    E-mail:
+                                <span t-field="docs.company_id.email"/>
+|
+                                    Tel:
+                                <span t-field="docs.company_id.phone"/>
+|
+                            </span>
+                        </span>
+                    </center>
+                </div>
+            </div>
+            <div class="article o_report_layout_standard">
+                <t t-raw="0"/>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_product_qr">
+        <!-- <t t-call="report.html_container"> -->
+        <t t-call="product_qr_code.product_template_external_layout">
+            <div class="page">
+                <br></br>
+                <h3 style="text-align:center;">
+                    <b> Product Refrence: </b>
+                    <span t-esc="docs.default_code" />
+                </h3>
+                <h3 style="text-align:center;">
+                    <b>  Product Name: </b>
+                    <span t-esc="docs.name" />
+                </h3>
+                <h3 style="text-align:center;">
+                    <b>    Product QR Code: </b>
+                </h3>
+                <div class="qr_code" style="text-align:center;">
+                    <img t-attf-src="data:image/*;base64,{{docs.qr_image}}"/>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

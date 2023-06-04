@@ -1,0 +1,9 @@
+<odoo>
+	<data>
+	 <template id="reconcil_popup" name="bank reconcil" inherit_id="web.assets_backend">
+	        <xpath expr="." position="inside">
+	            <link rel="stylesheet" href="/skit_bank_reconcil/static/src/css/popup.css"/>
+	            </xpath>
+	</template>
+	</data>
+</odoo>

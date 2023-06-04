@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="inherit_report_saleorder_document" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@class='page']//table//thead//tr//th[5]" position="after">
+            <th class="text-right">Tax Amount</th>
+        </xpath>
+
+        <xpath expr="//div[@class='page']//table//tbody//tr//td[5]" position="after">
+             <td class="text-right">
+                <span t-field="l.price_tax" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+            </td>
+        </xpath>
+    </template>
+</odoo>

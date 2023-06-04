@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="inherit_product_form_view_procurement_button">
+          <field name="name">product.product.inherit</field>
+          <field name="model">product.product</field>
+          <field name="inherit_id" ref="stock.product_form_view_procurement_button"/>
+          <field name="arch" type="xml">
+              <xpath expr="//button[@name='%(stock.act_product_stock_move_open)d']" position="before">
+                    <button name="pending_stock_moves" string="Pending Stock Moves" type="object"
+                            class="oe_stat_button" icon="fa-refresh"
+                            attrs="{'invisible':[('type', 'not in', ['product', 'consu'])]}"
+                            groups="stock.group_stock_user">
+<!--                        <div class="o_field_widget o_stat_info mr4">-->
+<!--                            <span class="o_stat_text">Min :</span>-->
+<!--                        </div>-->
+                    </button>
+              </xpath>
+          </field>
+    </record>
+
+</odoo>

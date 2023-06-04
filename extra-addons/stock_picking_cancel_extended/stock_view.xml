@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_picking_inherit_picking_cancel_form" model="ir.ui.view">
+            <field name="name">view.picking.inherit.picking.cancel.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_cancel']" position="replace">
+                    <button name="action_cancel" states="assigned,confirmed,done,partially_available,draft,waiting" string="Cancel" type="object"  groups="base.group_picking_cancel"/>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="after">
+                    <button name="action_cancel_draft" states="cancel" string="Set To Draft" type="object" />
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

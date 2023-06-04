@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="scrap_product_add_button_id" model="ir.ui.view">
+            <field name="name">Scrap Product</field>
+            <field name="model">stock.scrap</field>
+            <field name='inherit_id' ref='stock.stock_scrap_form_view'/>
+            <field name="arch" type="xml">
+                <field name='state' position='replace'>
+                    <field name="state" widget="statusbar"/>
+                </field>
+                <xpath expr='//header' position='inside'>
+                    <button name='do_waiting' type='object' string='Waiting Approval' states="draft"
+                            class='oe_highlight'/>
+                    <button name='do_draft' type='object' string='Draft' states="reject"/>
+                    <button name='do_reject' type='object' string='Reject' states="waiting" class='oe_highlight'
+                            groups='stock.group_stock_manager'/>
+                    <button name='do_scrap' type='object' string='Approve'
+                            class='oe_highlight' context="{'is_confirmation':True}"
+                            states="waiting" groups='stock.group_stock_manager'/>
+                </xpath>
+                <xpath expr="//div[@name='button_box']" position='inside'>
+                    <button class="oe_stat_button" name="action_get_stock_moves" string="Inventory Move" type="object"
+                            attrs="{'invisible':[('state','!=','done')]}" icon="fa-arrows-v"/>
+                    <field name='move_ids' invisible='1'/>
+                </xpath>
+                <field name='product_id' position='attributes'>
+                    <attribute name='invisible'>1</attribute>
+                    <attribute name='required'>0</attribute>
+                </field>
+                <field name='date_expected' position='after'>
+                    <field name='requested_by' invisible="1"/>
+                    <field name='approved_by' invisible="1"/>
+                </field>
+                <field name='product_uom_id' position='attributes'>
+                    <attribute name='required'>0</attribute>
+                </field>
+                <xpath expr="//label[@for='scrap_qty']" position='attributes'>
+                    <attribute name='invisible'>1</attribute>
+                </xpath>
+                <field name='scrap_qty' position='attributes'>
+                    <attribute name='invisible'>1</attribute>
+                </field>
+                <xpath expr="//form/sheet" position="inside">
+                    <notebook>
+                        <page string='Product'>
+                            <field name='scrap_product_id'>
+                                <tree editable='bottom'>
+                                    <field name='product_id'/>
+                                    <field name='scrap_qty'/>
+                                    <field name='product_uom_id'/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+                <xpath expr="//form/sheet" position="after">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

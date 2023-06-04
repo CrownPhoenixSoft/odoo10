@@ -1,0 +1,25 @@
+version: "3"
+services:
+  odoo:
+    image: cpmc/odoo:10
+    # image: odoo:10.0
+    env_file: .env
+    depends_on:
+      - postgres
+    ports:
+      - 8069:8069
+      - 8072:8072
+    volumes:
+      - data:/var/lib/odoo
+      - ./etc:/etc/odoo
+      - ./extra-addons:/mnt/extra-addons
+    restart: always
+  postgres:
+    image: postgres:10
+    env_file: .env
+    volumes:
+      - db:/var/lib/postgresql/data/pgdata
+
+volumes:
+  data:
+  db:

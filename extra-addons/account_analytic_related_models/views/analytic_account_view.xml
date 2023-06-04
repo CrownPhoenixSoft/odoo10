@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="inherit_view_account_analytic_account_form" model="ir.ui.view">
+    <field name="name">account.analytic.account.form</field>
+    <field name="model">account.analytic.account</field>
+    <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='partner_id']" position="after">
+        <field name="analytic_account_type" groups="analytic.group_analytic_accounting"/>
+        <field name="vehicle_id" />
+      </xpath>
+    </field>
+  </record>
+
+  <record id="inherit_view_employee_form" model="ir.ui.view">
+    <field name="name">hr.employee.form</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='user_id']" position="after">
+        <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+      </xpath>
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button name="related_costs" string="Cost/Revenue" type="object" class="oe_stat_button" icon="fa-usd"/>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="inherit_fleet_vehicle_view_form" model="ir.ui.view">
+    <field name="name">fleet.vehicle.form</field>
+    <field name="model">fleet.vehicle</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='location']" position="after">
+        <field name="analytic_account_id" />
+      </xpath>
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button name="related_costs" string="Cost/Revenue" type="object" class="oe_stat_button" icon="fa-usd"/>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="inherit_fleet_vehicle_cost_form" model="ir.ui.view">
+    <field name="name">fleet.vehicle.cost.form</field>
+    <field name="model">fleet.vehicle.cost</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_costs_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='amount']" position="after">
+        <field name="analytic_account_line_id" />
+      </xpath>
+    </field>
+  </record>
+
+</odoo>

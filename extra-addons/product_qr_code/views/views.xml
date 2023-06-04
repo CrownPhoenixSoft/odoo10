@@ -1,0 +1,57 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <!-- <record model="ir.ui.view" id="product_qr_code.list">
+      <field name="name">product_qr_code list</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_only_form_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='categ_id']" position="after">
+          <field name="qr_image" widget='image' class="oe_avatar"/>
+        </xpath>
+      </field>
+    </record> -->
+
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="product_qr_code.action_window">
+      <field name="name">product_qr_code window</field>
+      <field name="res_model">product_qr_code.product_qr_code</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="product_qr_code.action_server">
+      <field name="name">product_qr_code server</field>
+      <field name="model_id" ref="model_product_qr_code_product_qr_code"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="product_qr_code" id="product_qr_code.menu_root"/>
+-->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="product_qr_code.menu_1" parent="product_qr_code.menu_root"/>
+    <menuitem name="Menu 2" id="product_qr_code.menu_2" parent="product_qr_code.menu_root"/>
+-->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="product_qr_code.menu_1_list" parent="product_qr_code.menu_1" action="product_qr_code.action_window"/>
+    <menuitem name="Server to list" id="product_qr_code" parent="product_qr_code.menu_2" action="product_qr_code.action_server"/>
+-->
+  </data>
+</odoo>
